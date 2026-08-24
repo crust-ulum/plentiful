@@ -72,11 +72,15 @@ function F(v,b,n,W,mb,md) {
         }
         res = resn
     }
+    let resle = res.length!=0?"!!!":""
+    for (let i of res) {
+        resfinished.push(i.d)
+    }
     resfinished = resfinished.map((x)=>x.toReversed())
     if (W != undefined) {
         resfinished = resfinished.map((x)=>x.map((y)=>W[v.indexOf(y)]))
     }
-    return (res.length!=0?"!!!":"")+resfinished.map((x)=>x.join(W==undefined?" ":"")).join(" = ")
+    return resle+resfinished.map((x)=>x.join(W==undefined?" ":"")).join(" = ")
 }
 function _() {
     let inp = e.value.split(";")
