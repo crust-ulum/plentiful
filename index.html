@@ -23,34 +23,8 @@ e.value = "10;0 -109 22 13 4 5 86 7 88 -1"
 mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
 U=(v,b,n)=>{
     let on = n
-    if (v.length != b) {
-        isplentiful = false
-        if (!plentifulalerts.includes("#digits != base")) {
-            plentifulalerts.push("#digits != base")
-        }
-        return "digs."
-    }
-	let zi = false
-	for (let v_ of v) {
-		if (mod(v_,b-1n) == 0 && v_ != 0) zi = true
-	}
-	if (zi) {
-        isplentiful = false
-		let message = `any digit cannot be a multiple of base-1 (which is ${b-1n}) excluding 0\nthanks zi`
-        if (!plentifulalerts.includes(message)) {
-            plentifulalerts.push(message)
-        }
-        return "specific optimization"
-    }
     let res = []
     let udigits = v.map((x)=>{return mod(x,b)})
-    if (udigits.toSorted((a,b)=>Number(a-b)).join(" ") != new Array(Number(b)).fill(0).map((u,iu)=>iu).join(" ")) {
-        isplentiful = false
-        if (!plentifulalerts.includes("one or more lumns empty")) {
-            plentifulalerts.push("one or more lumns empty")
-        }
-        return "missing lumn."
-    }
     let resrem = []
     while (true) {
         let io = udigits.indexOf(mod(n,b))
@@ -73,6 +47,14 @@ U=(v,b,n)=>{
         n /= b
     }
 }
+function notplentifuldo() {
+	e.setAttribute("style",ex("#f00")); ec = 1000
+    e2.setAttribute("style",ex2("#f00"))
+    e2.textContent = `\n${plentifulalerts.join(" / ")}`
+    w = new Audio(atob(aud.replace("-","I")))
+    w.preservesPitch = false; w.playbackRate = 2
+    w.play()
+}
 function _() {
     isplentiful = true
     plentifulalerts = []
@@ -85,7 +67,29 @@ function _() {
         if (y/9n > am) am = y/9n
     })
     am++
-    if (am > 3000000n) {
+	
+	if (inp.length != Number(inpb)) {
+		plentifulalerts.push(`number of digits must be equal to base`)
+		notplentifuldo(); return
+	}
+	let zi = false
+	for (let v_ of inp) {
+		if (mod(v_,b-1n) == 0 && v_ != 0) zi = true
+	}
+	if (zi) {
+        plentifulalerts.push(`any digit cannot be a multiple of base-1 (which is ${b-1n}) excluding 0\nthanks zi`)
+		notplentifuldo(); return
+    }
+	if (
+		inp.map((u)=>mod(u,inpb)).toSorted((a,b)=>Number(a-b)).join(" ") !=
+		new Array(Number(inpb)).fill(0).map((u,iu)=>iu).join(" ")
+	) {
+        isplentiful = false
+        plentifulalerts.push("one or more lumns empty")
+        notplentifuldo(); return
+    }
+	
+    if (am > 5000000n) {
         e.setAttribute("style",ex("#0ff")); ec = 1000
 		e2.setAttribute("style",ex2("#0ff"))
 		e2.textContent = `\nyour set is too cool to be checked\n(some digits are too big, im not checking ${(-am).toLocaleString()} to ${am.toLocaleString()})`
@@ -96,7 +100,7 @@ function _() {
     }
     console.log(`checking ${-am} to ${am}`)
     logs = []
-    for (let i = -am; i <= am && isplentiful; i++) {
+    for (let i = -am; i <= am; i++) {
         logs.push(`${i.toString().padStart(am.toString().length+1)} | ${U(inp,inpb,i)}`)
     }
     if (isplentiful) {
@@ -105,12 +109,7 @@ function _() {
         w.preservesPitch = false; w.playbackRate = 2
         w.play()
     } else {
-        e.setAttribute("style",ex("#f00")); ec = 1000
-        e2.setAttribute("style",ex2("#f00"))
-        e2.textContent = `\n${plentifulalerts.join(" / ")}`
-        w = new Audio(atob(aud.replace("-","I")))
-        w.preservesPitch = false; w.playbackRate = 2
-        w.play()
+        notplentifuldo()
     }
     console.log(logs.join("\n"))
 }
