@@ -1,0 +1,121 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+
+document.bgColor = "black"
+e = document.createElement("input")
+e.setAttribute("type","text")
+ex=(x)=>`font-family:consolas;font-size:60px;word-break:break-word;white-space:pre-line;background-color:black;width:100%;border:none;outline:1px solid ${x};color:${x}`
+e.setAttribute("style",ex("#fff"))
+document.body.appendChild(e)
+ec = 0
+aud = 'aHR0cHM6Ly9odG1sLWNsYXNzaWMuaXRjaC56b25lL2h0bWwvOTQ4NzA1L2h0bWw1Z2FtZS9zbmRfc3ltMD-ub2dn'
+e2 = document.createElement("div")
+ex2=(x)=>`font-family:consolas;font-size:20px;word-break:break-word;white-space:pre-line;color:${x}`
+e2.setAttribute("style","font-family:consolas;font-size:40px;word-break:break-word;white-space:pre-line;color:white")
+e2.textContent = "syntax:\n3;-1 0 1\n10;0 1 22 13 4 5 6 7 8 -1\npress enter"
+document.body.appendChild(e2)
+e.value = "10;0 -109 22 13 4 5 86 7 88 -1"
+
+mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
+U=(v,b,n)=>{
+    let on = n
+    if (v.length != b) {
+        isplentiful = false
+        if (!plentifulalerts.includes("#digits != base")) {
+            plentifulalerts.push("#digits != base")
+        }
+        return "digs."
+    }
+    let res = []
+    let udigits = v.map((x)=>{return mod(x,b)})
+    if (udigits.toSorted((a,b)=>Number(a-b)).join(" ") != new Array(Number(b)).fill(0).map((u,iu)=>iu).join(" ")) {
+        isplentiful = false
+        if (!plentifulalerts.includes("one or more lumns empty")) {
+            plentifulalerts.push("one or more lumns empty")
+        }
+        return "missing lumn."
+    }
+    let resrem = []
+    while (true) {
+        let io = udigits.indexOf(mod(n,b))
+        res.push(v[io])
+        if (resrem.includes(n)) {
+			a = resrem.indexOf(n)
+            if (!(a == res.length-2 && res[a] == 0)) {
+                isplentiful = false
+                plentifulalerts.push(`${on} is adic`)
+            }
+            res[a] = `${res[a]}>>`
+            res.pop()
+            res[res.length-1] = `<<${res[res.length-1]}`
+			res.reverse()
+			return res.join(" ")
+        } else {
+            resrem.push(n)
+        }
+        n -= v[io]
+        n /= b
+    }
+}
+function _() {
+    isplentiful = true
+    plentifulalerts = []
+    z = e.value.split(";")
+    inpb = BigInt(z[0])
+    inp = z[1].split(" ").map(BigInt)
+    am = 0n
+    inp.map((x)=>{
+        y = x<0?-x:x
+        if (y/9n > am) am = y/9n
+    })
+    am++
+    console.log(`checking ${-am} to ${am}`)
+    logs = []
+    for (let i = -am; i <= am; i++) {
+        logs.push(`${i.toString().padStart(am.toString().length+1)} | ${U(inp,inpb,i)}`)
+    }
+    if (isplentiful) {
+        e.setAttribute("style",ex("#0f0")); ec = 1000
+        w = new Audio(atob(aud.replace("-","Y")))
+        w.preservesPitch = false; w.playbackRate = 2
+        w.play()
+    } else {
+        e.setAttribute("style",ex("#f00")); ec = 1000
+        e2.setAttribute("style",ex2("#f00"))
+        e2.textContent = `\n${plentifulalerts.join(" / ")}`
+        w = new Audio(atob(aud.replace("-","I")))
+        w.preservesPitch = false; w.playbackRate = 2
+        w.play()
+    }
+    console.log(logs.join("\n"))
+}
+document.addEventListener("keydown",(E)=>{
+    if (E.key == "Enter") {
+        e2.textContent = ""
+        try { _() } catch {
+            e.setAttribute("style",ex("#ff0")); ec = 1000
+            e2.setAttribute("style",ex2("#ff0"))
+            e2.textContent = "\nerror parsing"
+            w = new Audio(atob(aud.replace("-","Q")))
+            w.preservesPitch = false; w.playbackRate = 2
+            w.play()
+        }
+    }
+})
+nd = Date.now()
+I = setInterval(()=>{
+    dt = Date.now() - nd
+    nd = Date.now()
+    if (ec > 0) {
+        ec -= dt
+    } else {
+        e.setAttribute("style",ex("#fff"))
+    }
+},0)
+
+</script>
+</body>
+</html>
