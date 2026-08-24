@@ -52,7 +52,7 @@ function F(v,b,n,W,maxbranches,maxdigits) {
     let udigits = v.map((x)=>{return mod(x,b)})
     let resrem = []
     let ooo = 0
-    while (res.length != 0 && res.length < maxbranches && ooo < maxdigits) {
+    while (res.length != 0 && resfinished < maxbranches && ooo < maxdigits) {
         ooo++
         let resn = []
         for (let r of res) {
