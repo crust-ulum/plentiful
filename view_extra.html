@@ -57,7 +57,6 @@ function F(v,b,n,W,maxbranches,maxdigits) {
         let resn = []
         for (let r of res) {
             let lu = mod(r.n,b)
-            let nres = []
             for (let di = 0; di < udigits.length; di++) {
                 if (udigits[di] == lu) {
                     let rr = {d: r.d.map((x)=>x), n: r.n}
