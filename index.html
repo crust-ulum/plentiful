@@ -101,7 +101,7 @@ function _() {
     }
     if (verbose) console.log(`checking ${-am} to ${am}`)
     logs = []
-    for (let i = -am; i <= am; i++) {
+    for (let i = -am; i <= am && isplentiful; i++) {
 		if (!verbose) {
 			U(inp,inpb,i)
 		} else logs.push(`${i.toString().padStart(am.toString().length+1)} | ${U(inp,inpb,i)}`)
@@ -114,7 +114,7 @@ function _() {
     } else {
         notplentifuldo(1)
     }
-    if (verbose) console.log(logs.join("\n"))
+    if (verbose) e2.textContent += "\n\nverbose\n" + logs.join("\n")
 }
 document.addEventListener("keydown",(E)=>{
     if (E.key == "Enter") {
