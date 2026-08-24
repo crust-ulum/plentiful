@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>llama_e</title>
+</head>
+<body>
+<script>
+
+document.bgColor = "black"
+ex=(x,y)=>`font-family:consolas;font-size:${y}px;word-break:break-word;white-space:pre-line;background-color:black;width:100%;border:none;outline:1px solid ${x};color:${x}`
+e = document.createElement("input")
+e.setAttribute("type","text")
+document.body.appendChild(e)
+e2 = document.createElement("input")
+e2.setAttribute("type","text")
+document.body.appendChild(e2)
+e3 = document.createElement("input")
+e3.setAttribute("type","text")
+document.body.appendChild(e3)
+document.body.appendChild(document.createElement("br"))
+document.body.appendChild(document.createElement("br"))
+document.body.appendChild(document.createElement("br"))
+ex2=(x)=>`font-family:consolas;font-size:${fs}px;word-break:break-word;white-space:pre-line;color:${x};`
+et = document.createElement("div")
+et.setAttribute("type","text")
+et.setAttribute("style",`font-family:consolas;font-size:15px;word-break:break-word;white-space:pre-line;color:white;`)
+document.body.appendChild(et)
+e.value = "10;0 1 2 22 13 4 5 6 7 8 -1"
+e2.value = "0,1,2,Z,B,4,5,6,7,8,L"
+e3.value = "-100 to 100 / 1000 / 50 / 15"
+et.textContent = "hi.\nversion: EXTRAVAGANTS (or extravagents.)\n\nsyntax\nfirst box: {base};{digits}\nsecond box: {digit symbols}. will show raw digit values if empty\nthird box: {low} to {high} / {maximum digit representations} / {maximum digits per representation} / {font size}"
+aud = 'aHR0cHM6Ly9odG1sLWNsYXNzaWMuaXRjaC56b25lL2h0bWwvOTQ4NzA1L2h0bWw1Z2FtZS9zbmRfc3ltMD-ub2dn'
+
+fs = 15
+ec = 0
+function allcolor(x) {
+    e.setAttribute("style",ex(x,30))
+    e2.setAttribute("style",ex(x,30))
+    e3.setAttribute("style",ex(x,30))
+}
+allcolor("#fff")
+function nope(x) {
+	allcolor("#f00"); ec = 1000
+    et.textContent = x
+    w = new Audio(atob(aud.replace("-","I")))
+    w.preservesPitch = false; w.playbackRate = 2
+    w.play()
+}
+mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
+function F(v,b,n,W,maxbranches,maxdigits) {
+    let res = [{d: [], n: n}]
+    let resfinished = []
+    let udigits = v.map((x)=>{return mod(x,b)})
+    let resrem = []
+    let ooo = 0
+    while (res.length != 0 && res.length < maxbranches && ooo < maxdigits) {
+        ooo++
+        let resn = []
+        for (let r of res) {
+            let lu = mod(r.n,b)
+            let nres = []
+            for (let di = 0; di < udigits.length; di++) {
+                if (udigits[di] == lu) {
+                    let rr = {d: r.d.map((x)=>x), n: r.n}
+                    rr.d.push(v[di])
+                    rr.n -= v[di]
+                    rr.n /= b
+                    if (rr.n == 0) {
+                        resfinished.push(rr.d)
+                    } else {
+                        resn.push(rr)
+                    }
+                }
+            }
+        }
+        res = resn
+    }
+    resfinished = resfinished.map((x)=>x.toReversed())
+    if (W != undefined) {
+        resfinished = resfinished.map((x)=>x.map((y)=>W[v.indexOf(y)]))
+    }
+    return (res.length!=0?"!!!":"")+resfinished.map((x)=>x.join(W==undefined?" ":"")).join(" = ")
+}
+function _() {
+    let inp = e.value.split(";")
+    let inp1 = BigInt(inp[0])
+    let inp2 = inp[1].split(" ").map(BigInt)
+    if (inp2.length < Number(inp1)) {
+        nope("set has less digits than base")
+        et.setAttribute("style",ex2("#f00"))
+        return
+    }
+    let inp2m = inp2.map((u)=>mod(u,inp1))
+    for (let __ = 0n; __ < inp1; __++) {
+        if (!(inp2m.includes(__))) {
+            nope("missing lumn")
+            et.setAttribute("style",ex2("#f00"))
+            return
+        }
+    }
+    let inp3 = e2.value==""?undefined:e2.value.split(",")
+    let inp4 = e3.value.split(" / ")
+    let inp4a = inp4[0].split(" to ").map(BigInt) // range
+    let inp4b = BigInt(inp4[1]) // maxbranches
+    let inp4c = BigInt(inp4[2]) // maxdigits
+    fs = inp4[3] // fontsize
+    let pad = Math.max(...inp4a.map((u)=>u.toString().length))
+    log = []
+    if (inp4a[1] - inp4a[0] > 10000000n) {
+        allcolor("#0ff"); ec = 1000
+        et.setAttribute("style",ex2("#0ff"))
+        et.textContent = `im not doing that`
+        w = new Audio(atob(aud.replace("-","M")))
+        w.preservesPitch = false; w.playbackRate = 2
+        w.play()
+        return
+    }
+    for (let k = inp4a[0]; k <= inp4a[1]; k++) {
+        log.push(`${k.toString().padStart(pad).replaceAll(" ",".")} | ${F(inp2,inp1,k,inp3,inp4b,inp4c)}`)
+    }
+    et.setAttribute("style",ex2("#0f0"))
+    allcolor("#0f0"); ec = 1000
+    w = new Audio(atob(aud.replace("-","Y")))
+    w.preservesPitch = false; w.playbackRate = 2
+    w.play()
+    et.textContent = log.join("\n")
+}
+document.addEventListener("keydown",(E)=>{
+    if (E.key == "Enter") {
+        et.textContent = ""
+        try { _() } catch (Err) {
+        	allcolor("#ff0"); ec = 1000
+            et.setAttribute("style",ex2("#ff0"))
+            et.textContent = `error:\n${Err.stack}\n\nif you think this is not supposed to happen, send to cr`
+            w = new Audio(atob(aud.replace("-","Q")))
+            w.preservesPitch = false; w.playbackRate = 2
+            w.play()
+        }
+    }
+})
+nd = Date.now()
+I = setInterval(()=>{
+    dt = Date.now() - nd
+    nd = Date.now()
+    if (ec > 0) {
+        ec -= dt
+    } else {
+        allcolor("#fff")
+        if (et.style.color == "rgb(0, 255, 0)") et.setAttribute("style",ex2("white"))
+    }
+},0)
+
+</script>
+</body>
+</html>
