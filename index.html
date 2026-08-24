@@ -74,14 +74,14 @@ function _() {
 	}
 	let zi = false
 	for (let v_ of inp) {
-		if (mod(v_,b-1n) == 0 && v_ != 0) zi = true
+		if (mod(v_,inpb-1n) == 0 && v_ != 0) zi = true
 	}
 	if (zi) {
-        plentifulalerts.push(`any digit cannot be a multiple of base-1 (which is ${b-1n}) excluding 0\nthanks zi`)
+        plentifulalerts.push(`any digit cannot be a multiple of base-1 (which is ${inpb-1n}) excluding 0\nthanks zi`)
 		notplentifuldo(); return
     }
 	if (
-		inp.map((u)=>mod(u,inpb)).toSorted((a,b)=>Number(a-b)).join(" ") !=
+		inp.map((u)=>mod(u,inpb)).toSorted((A,B)=>Number(A-B)).join(" ") !=
 		new Array(Number(inpb)).fill(0).map((u,iu)=>iu).join(" ")
 	) {
         isplentiful = false
