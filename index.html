@@ -20,6 +20,7 @@ e2.textContent = "syntax:\n3;-1 0 1\n10;0 1 22 13 4 5 6 7 8 -1\npress enter"
 document.body.appendChild(e2)
 e.value = "10;0 -109 22 13 4 5 86 7 88 -1"
 
+verbose = false
 mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
 U=(v,b,n)=>{
     let on = n
@@ -33,7 +34,7 @@ U=(v,b,n)=>{
 			a = resrem.indexOf(n)
             if (!(a == res.length-2 && res[a] == 0)) {
                 isplentiful = false
-                plentifulalerts.push(`${on} is adic`)
+                plentifulalerts.push(`${on}`)
             }
             res[a] = `${res[a]}>>`
             res.pop()
@@ -47,10 +48,10 @@ U=(v,b,n)=>{
         n /= b
     }
 }
-function notplentifuldo() {
+function notplentifuldo(rr) {
 	e.setAttribute("style",ex("#f00")); ec = 1000
     e2.setAttribute("style",ex2("#f00"))
-    e2.textContent = `\n${plentifulalerts.join(" / ")}`
+    e2.textContent = rr==undefined?`\n${plentifulalerts[0]}`:`\nthese numbers:\n[${plentifulalerts.join(",")}]\ncannot be written`
     w = new Audio(atob(aud.replace("-","I")))
     w.preservesPitch = false; w.playbackRate = 2
     w.play()
@@ -89,7 +90,7 @@ function _() {
         notplentifuldo(); return
     }
 	
-    if (am > 5000000n) {
+    if (am > 10000000n) {
         e.setAttribute("style",ex("#0ff")); ec = 1000
 		e2.setAttribute("style",ex2("#0ff"))
 		e2.textContent = `\nyour set is too cool to be checked\n(some digits are too big, im not checking ${(-am).toLocaleString()} to ${am.toLocaleString()})`
@@ -98,10 +99,12 @@ function _() {
         w.play()
 		return
     }
-    console.log(`checking ${-am} to ${am}`)
+    if (verbose) console.log(`checking ${-am} to ${am}`)
     logs = []
     for (let i = -am; i <= am; i++) {
-        logs.push(`${i.toString().padStart(am.toString().length+1)} | ${U(inp,inpb,i)}`)
+		if (!verbose) {
+			U(inp,inpb,i)
+		} else logs.push(`${i.toString().padStart(am.toString().length+1)} | ${U(inp,inpb,i)}`)
     }
     if (isplentiful) {
         e.setAttribute("style",ex("#0f0")); ec = 1000
@@ -109,9 +112,9 @@ function _() {
         w.preservesPitch = false; w.playbackRate = 2
         w.play()
     } else {
-        notplentifuldo()
+        notplentifuldo(1)
     }
-    console.log(logs.join("\n"))
+    if (verbose) console.log(logs.join("\n"))
 }
 document.addEventListener("keydown",(E)=>{
     if (E.key == "Enter") {
@@ -124,7 +127,10 @@ document.addEventListener("keydown",(E)=>{
             w.preservesPitch = false; w.playbackRate = 2
             w.play()
         }
-    }
+    } else if (E.key == "/") {
+		verbose = !verbose
+		console.log(`verbose ${verbose?"active":"disabled"}`)
+	}
 })
 nd = Date.now()
 I = setInterval(()=>{
