@@ -93,7 +93,7 @@ function _() {
 		new Array(Number(inpb)).fill(0).map((u,iu)=>iu).join(" ")
 	) {
         isplentiful = false
-        plentifulalerts.push("one or more lumns empty")
+        plentifulalerts.push("one or more lumns empty\nlumns: " + inp.map((u)=>mod(u,inpb)).join(" "))
         notplentifuldo(); return
     }
 	
