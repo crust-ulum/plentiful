@@ -8,14 +8,14 @@
 document.bgColor = "black"
 e = document.createElement("input")
 e.setAttribute("type","text")
-ex=(x)=>`font-family:consolas;font-size:60px;word-break:break-word;white-space:pre-line;background-color:black;width:100%;border:none;outline:1px solid ${x};color:${x}`
+ex=(x)=>`font-family:"consolas",monospace;font-size:60px;word-break:break-word;white-space:pre-line;background-color:black;width:100%;border:none;outline:1px solid ${x};color:${x}`
 e.setAttribute("style",ex("#fff"))
 document.body.appendChild(e)
 ec = 0
 aud = 'aHR0cHM6Ly9odG1sLWNsYXNzaWMuaXRjaC56b25lL2h0bWwvOTQ4NzA1L2h0bWw1Z2FtZS9zbmRfc3ltMD-ub2dn'
 e2 = document.createElement("div")
-ex2=(x)=>`font-family:consolas;font-size:20px;word-break:break-word;white-space:pre-line;color:${x}`
-e2.setAttribute("style","font-family:consolas;font-size:40px;word-break:break-word;white-space:pre-line;color:white")
+ex2=(x)=>`font-family:"consolas",monospace;font-size:20px;word-break:break-word;white-space:pre-line;color:${x}`
+e2.setAttribute("style","font-family:"consolas",monospace;font-size:40px;word-break:break-word;white-space:pre-line;color:white")
 e2.textContent = "syntax:\n3;-1 0 1\n10;0 1 22 13 4 5 6 7 8 -1\npress enter"
 document.body.appendChild(e2)
 e.value = "10;0 -109 22 13 4 5 86 7 88 -1"
