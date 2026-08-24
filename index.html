@@ -63,7 +63,19 @@ function _() {
         if (y/9n > am) am = y/9n
     })
     am++
-	
+
+	if (!(inp.includes(0n))) {
+		let message = [
+			"if we get of 0, then we have to",
+			"put different digits in all those places",
+			"and we end up with an infinite sum.",
+			"we can't write any finite values.",
+			"EVERY NUMBER IS UNDEFINED!",
+			"-TGC"
+		]
+		plentifulalerts.push(message.join("\n"))
+		notplentifuldo(); return
+	}
 	if (inp.length != Number(inpb)) {
 		plentifulalerts.push(`number of digits must be equal to base`)
 		notplentifuldo(); return
@@ -73,7 +85,7 @@ function _() {
 		if (mod(v_,inpb-1n) == 0 && v_ != 0) zi = true
 	}
 	if (zi) {
-        plentifulalerts.push(`any digit cannot be a multiple of base-1 (which is ${inpb-1n}) excluding 0\nthanks zi`)
+        plentifulalerts.push(`any digit cannot be a multiple of base - 1 (which is ${inpb-1n}) excluding 0\nthanks zi`)
 		notplentifuldo(); return
     }
 	if (
