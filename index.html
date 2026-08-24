@@ -85,13 +85,14 @@ function _() {
         if (y/9n > am) am = y/9n
     })
     am++
-    if (am > 500000n) {
+    if (am > 3000000n) {
         e.setAttribute("style",ex("#0ff")); ec = 1000
 		e2.setAttribute("style",ex2("#0ff"))
 		e2.textContent = `\nyour set is too cool to be checked\n(some digits are too big, im not checking ${(-am).toLocaleString()} to ${am.toLocaleString()})`
         w = new Audio(atob(aud.replace("-","M")))
         w.preservesPitch = false; w.playbackRate = 2
         w.play()
+		return
     }
     console.log(`checking ${-am} to ${am}`)
     logs = []
