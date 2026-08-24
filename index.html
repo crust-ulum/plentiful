@@ -108,10 +108,10 @@ function _() {
 document.addEventListener("keydown",(E)=>{
     if (E.key == "Enter") {
         e2.textContent = ""
-        try { _() } catch {
+        try { _() } catch (Err) {
             e.setAttribute("style",ex("#ff0")); ec = 1000
             e2.setAttribute("style",ex2("#ff0"))
-            e2.textContent = "\nerror parsing"
+            e2.textContent = `an error occured:\n${Err.stack}\n\nsend this to cr if possible`
             w = new Audio(atob(aud.replace("-","Q")))
             w.preservesPitch = false; w.playbackRate = 2
             w.play()
