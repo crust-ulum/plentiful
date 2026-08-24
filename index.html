@@ -30,6 +30,18 @@ U=(v,b,n)=>{
         }
         return "digs."
     }
+	let zi = false
+	for (let v_ of v) {
+		if (mod(v_,b-1n) == 0 && v_ != 0) zi = true
+	}
+	if (zi) {
+        isplentiful = false
+		let message = `any digit cannot be a multiple of base-1 (which is ${b-1n}) excluding 0\nthanks zi`
+        if (!plentifulalerts.includes(message)) {
+            plentifulalerts.push(message)
+        }
+        return "specific optimization"
+    }
     let res = []
     let udigits = v.map((x)=>{return mod(x,b)})
     if (udigits.toSorted((a,b)=>Number(a-b)).join(" ") != new Array(Number(b)).fill(0).map((u,iu)=>iu).join(" ")) {
