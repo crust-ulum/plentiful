@@ -119,7 +119,7 @@ document.addEventListener("keydown",(E)=>{
         try { _() } catch (Err) {
             e.setAttribute("style",ex("#ff0")); ec = 1000
             e2.setAttribute("style",ex2("#ff0"))
-            e2.textContent = `\nan error occured when checking:\n${Err.stack}\n\nsend this to cr if possible`
+            e2.textContent = `\nan error occured when checking:\n\n${Err.stack}\n\nif you think this is not supposed to happen, send to cr`
             w = new Audio(atob(aud.replace("-","Q")))
             w.preservesPitch = false; w.playbackRate = 2
             w.play()
