@@ -85,9 +85,17 @@ function _() {
         if (y/9n > am) am = y/9n
     })
     am++
+    if (am > 500000n) {
+        e.setAttribute("style",ex("#0ff")); ec = 1000
+		e2.setAttribute("style",ex2("#0ff"))
+		e2.textContent = `\nyour set is too cool to be checked\n(some digits are too big, im not checking ${(-am).toLocaleString()} to ${am.toLocaleString()})`
+        w = new Audio(atob(aud.replace("-","M")))
+        w.preservesPitch = false; w.playbackRate = 2
+        w.play()
+    }
     console.log(`checking ${-am} to ${am}`)
     logs = []
-    for (let i = -am; i <= am; i++) {
+    for (let i = -am; i <= am && isplentiful; i++) {
         logs.push(`${i.toString().padStart(am.toString().length+1)} | ${U(inp,inpb,i)}`)
     }
     if (isplentiful) {
@@ -111,7 +119,7 @@ document.addEventListener("keydown",(E)=>{
         try { _() } catch (Err) {
             e.setAttribute("style",ex("#ff0")); ec = 1000
             e2.setAttribute("style",ex2("#ff0"))
-            e2.textContent = `an error occured:\n${Err.stack}\n\nsend this to cr if possible`
+            e2.textContent = `\nan error occured when checking:\n${Err.stack}\n\nsend this to cr if possible`
             w = new Audio(atob(aud.replace("-","Q")))
             w.preservesPitch = false; w.playbackRate = 2
             w.play()
