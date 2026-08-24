@@ -46,13 +46,12 @@ function nope(x) {
     w.play()
 }
 mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
-function F(v,b,n,W,maxbranches,maxdigits) {
+function F(v,b,n,W,mb,md) {
     let res = [{d: [], n: n}]
     let resfinished = []
     let udigits = v.map((x)=>{return mod(x,b)})
-    let resrem = []
     let ooo = 0
-    while (res.length != 0 && resfinished < maxbranches && ooo < maxdigits) {
+    while (res.length != 0 && resfinished.length < mb && ooo < md) {
         ooo++
         let resn = []
         for (let r of res) {
