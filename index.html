@@ -17,8 +17,8 @@ e2 = document.createElement("div")
 ex2=(x)=>`font-family:'consolas',monospace;font-size:30px;word-break:break-word;white-space:pre-line;color:${x}`
 e2.setAttribute("style","font-family:'consolas',monospace;font-size:40px;word-break:break-word;white-space:pre-line;color:white")
 e2.textContent = "syntax:\n3;-1 0 1\n10;0 1 22 13 4 5 6 7 8 -1\npress enter"
-document.body.appendChild(document.createElement("br")
-document.body.appendChild(document.createElement("br")
+document.body.appendChild(document.createElement("br")) 
+document.body.appendChild(document.createElement("br")) 
 document.body.appendChild(e2)
 e.value = "10;0 1 2 3 4 5 6 7 8 -1"
 mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
