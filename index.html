@@ -26,6 +26,39 @@ slang = [ // flowi wants this. llama.
 	["Z", 22n],["B", 13n],["L", -1n],["S", -109n], // scooter = -109 btw.
 	["WETRAISINS",86n],["WETCRAISINS",88n],["A",-3013n]
 ]
+pm = [
+	"woohoo! plentiful!!", 
+	"this set flashed green",
+	"it's not red this time", 
+	"plentiful plentiful plentiful", 
+	"^^^ that set is extremely cool because it's plentiful", 
+	"hey, can i double check?", 
+	"plentiful. real.", 
+	"research shows finding a plentiful set increases lifespan by 300%",
+	"Yes Is Plentiful.", 
+	"P L E N T I F U L",
+	"do you have 0 somewhere in that set?",
+	"most llama set ever.", //zi
+	"this set is llama approved", //zi
+	"LLAMAMAMAMAAAAAAAAA",
+	"only 0.02% of people can find a plentiful set by themselves",
+	"Caillou Finds a Plentiful Set/Ungrounded", //zi
+	"top infinity plentiful sets. at number infinity is that set"
+]
+xpm = [
+	"X",
+	"Nope!",
+	"nuh uh",
+	"i dont like that set so i marked it as not plentiful",
+	"as you can see (and hear) this isnt plentiful",
+	"go back to that plentiful set",
+	"not plentiful? you're getting a ticket for that",
+	"eagle plentiful",
+	"you have too many negatives",
+	"Man.",
+	"ok look it didnt have to be this way but..."
+]
+
 
 mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
 U=(v,b,n)=>{
@@ -40,7 +73,7 @@ U=(v,b,n)=>{
 			a = resrem.indexOf(n)
             if (!(a == res.length-2 && res[a] == 0)) {
                 isplentiful = false
-                plentifulalerts.push(`${on}`)
+				notplentifuldo(`${on} is unwritable`)
             }
             return
         } else {
@@ -53,14 +86,14 @@ U=(v,b,n)=>{
 function notplentifuldo(rr) {
 	e.setAttribute("style",ex("#f00")); ec = 1000
     e2.setAttribute("style",ex2("#f00"))
-    e2.textContent = rr==undefined?`${plentifulalerts[0]}`:`the number ${plentifulalerts.join(",")} cannot be written`
+    e2.textContent = `${xpm[Math.floor(Math.random()*xpm.length)]}\n\n${rr}`
     w = new Audio(atob(aud.replace("-","I")))
     w.preservesPitch = false; w.playbackRate = 2
     w.play()
 }
 function _() {
     isplentiful = true
-    plentifulalerts = []
+    plentifulalerts = ""
     z = e.value.split(";")
     inpb = BigInt(z[0])
     inp = z[1].split(" ").map((u)=>{
@@ -85,28 +118,23 @@ function _() {
 			"EVERY NUMBER IS UNDEFINED!",
 			"-TGC"
 		]
-		plentifulalerts.push(message.join("\n"))
-		notplentifuldo(); return
+		notplentifuldo(message.join("\n")); return
 	}
 	if (inp.length != Number(inpb)) {
-		plentifulalerts.push(`number of digits must be equal to base`)
-		notplentifuldo(); return
+		notplentifuldo(`number of digits must be equal to base`); return
 	}
 	let zi = false
 	for (let v_ of inp) {
 		if (mod(v_,inpb-1n) == 0 && v_ != 0) zi = true
 	}
 	if (zi) {
-        plentifulalerts.push(`any digit cannot be a multiple of base - 1 (which is ${inpb-1n}) excluding 0\nthanks zi`)
-		notplentifuldo(); return
+		notplentifuldo(`any digit cannot be a multiple of base - 1 (which is ${inpb-1n}) excluding 0\nthanks zi`); return
     }
 	if (
 		inp.map((u)=>mod(u,inpb)).toSorted((A,B)=>Number(A-B)).join(" ") !=
 		new Array(Number(inpb)).fill(0).map((u,iu)=>iu).join(" ")
 	) {
-        isplentiful = false
-        plentifulalerts.push("one or more lumns empty\nlumns: " + inp.map((u)=>mod(u,inpb)).join(" "))
-        notplentifuldo(); return
+        notplentifuldo(plentifulalerts.push("one or more lumns empty\nlumns: " + inp.map((u)=>mod(u,inpb)).join(" "))); return
     }
 	
     if (am > 10000000n) {
@@ -128,27 +156,7 @@ function _() {
         w = new Audio(atob(aud.replace("-","Y")))
         w.preservesPitch = false; w.playbackRate = 2
         w.play()
-		pm = [
-			"woohoo! plentiful!!", 
-			"this set flashed green",
-			"it's not red this time", 
-			"plentiful plentiful plentiful", 
-			"^^^ that set is extremely cool because it's plentiful", 
-			"hey, can i double check?", 
-			"plentiful. real.", 
-			"research shows finding a plentiful set increases lifespan by 300%",
-			"Yes Is Plentiful.", 
-			"P L E N T I F U L",
-			"do you have 0 somewhere in that set?",
-			"most llama set ever.", //zi
-			"this set is llama approved", //zi
-			"LLAMAMAMAMAAAAAAAAA",
-			"only 0.02% of people can find a plentiful set by themselves",
-			
-		]
         e2.textContent = pm[Math.floor(pm.length*Math.random())]
-    } else {
-        notplentifuldo(1)
     }
 }
 document.addEventListener("keydown",(E)=>{
