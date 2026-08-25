@@ -93,7 +93,6 @@ function notplentifuldo(rr) {
 }
 function _() {
     isplentiful = true
-    plentifulalerts = ""
     z = e.value.split(";")
     inpb = BigInt(z[0])
     inp = z[1].split(" ").map((u)=>{
@@ -134,7 +133,7 @@ function _() {
 		inp.map((u)=>mod(u,inpb)).toSorted((A,B)=>Number(A-B)).join(" ") !=
 		new Array(Number(inpb)).fill(0).map((u,iu)=>iu).join(" ")
 	) {
-        notplentifuldo(plentifulalerts.push("one or more lumns empty\nlumns: " + inp.map((u)=>mod(u,inpb)).join(" "))); return
+        notplentifuldo("one or more lumns empty\nlumns: " + inp.map((u)=>mod(u,inpb)).join(" ")); return
     }
 	
     if (am > 10000000n) {
