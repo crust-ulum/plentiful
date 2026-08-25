@@ -21,6 +21,12 @@ document.body.appendChild(document.createElement("br"))
 document.body.appendChild(document.createElement("br")) 
 document.body.appendChild(e2)
 e.value = "10;0 1 2 3 4 5 6 7 8 -1"
+
+slang = [ // flowi wants this. llama.
+	["Z", 22n],["B", 13n],["L", -1n],["S", -109n] // scooter = -109 btw.
+	["WETRAISINS",86n],["WETCRAISINS",88n],["A",-3013n]
+]
+
 mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
 U=(v,b,n)=>{
     let on = n
@@ -57,7 +63,12 @@ function _() {
     plentifulalerts = []
     z = e.value.split(";")
     inpb = BigInt(z[0])
-    inp = z[1].split(" ").map(BigInt)
+    inp = z[1].split(" ").map((u)=>{
+		for (let slang_ of slang) {
+			if (u.toLocaleUpperCase() == slang_[0]) return slang_[1]
+		}
+		return BigInt(u)
+	})
     am = 0n
     inp.map((x)=>{
         y = x<0?-x:x
@@ -128,7 +139,12 @@ function _() {
 			"research shows finding a plentiful set increases lifespan by 300%",
 			"Yes Is Plentiful.", 
 			"P L E N T I F U L",
-			"do you have 0 somewhere in that set?"
+			"do you have 0 somewhere in that set?",
+			"most llama set ever.", //zi
+			"this set is llama approved", //zi
+			"LLAMAMAMAMAAAAAAAAA",
+			"only 0.02% of people can find a plentiful set by themselves",
+			
 		]
         e2.textContent = pm[Math.floor(pm.length*Math.random())]
     } else {
