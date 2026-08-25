@@ -19,7 +19,6 @@ e2.setAttribute("style","font-family:'consolas',monospace;font-size:40px;word-br
 e2.textContent = "syntax:\n3;-1 0 1\n10;0 1 22 13 4 5 6 7 8 -1\npress enter"
 document.body.appendChild(e2)
 e.value = "10;0 -109 22 13 4 5 86 7 88 -1"
-
 mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
 U=(v,b,n)=>{
     let on = n
@@ -112,16 +111,30 @@ function _() {
     }
     if (isplentiful) {
         e.setAttribute("style",ex("#0f0")); ec = 1000
+        e2.setAttribute("style",ex2("#0ff"))
         w = new Audio(atob(aud.replace("-","Y")))
         w.preservesPitch = false; w.playbackRate = 2
         w.play()
+		pm = [
+			"woohoo! plentiful!!", 
+			"this set flashed green",
+			"it's not red this time", 
+			"plentiful plentiful plentiful", 
+			"^^^ that set is extremely cool because it's plentiful", 
+			"hey, can i double check?", 
+			"plentiful. real.", 
+			"research shows finding a plentiful set increases lifespan by 300%",
+			"Yes Is Plentiful.", 
+			"plentifulization"
+		]
+        e2.textContent = pm[Math.floor(pm.length*Math.random())]
     } else {
         notplentifuldo(1)
     }
 }
 document.addEventListener("keydown",(E)=>{
+	e2.textContent = "" 
     if (E.key == "Enter") {
-        e2.textContent = ""
         try { _() } catch (Err) {
             e.setAttribute("style",ex("#ff0")); ec = 1000
             e2.setAttribute("style",ex2("#ff0"))
