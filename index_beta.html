@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>llama</title>
+</head>
+<body>
+<script>
+
+document.bgColor = "black"
+e = document.createElement("input")
+e.setAttribute("type","text")
+ex=(x)=>`font-family:'consolas',monospace;font-size:60px;word-break:break-word;white-space:pre-line;background-color:black;width:100%;border:none;outline:1px solid ${x};color:${x}`
+e.setAttribute("style",ex("#fff"))
+document.body.appendChild(e)
+ec = 0
+aud = 'aHR0cHM6Ly9odG1sLWNsYXNzaWMuaXRjaC56b25lL2h0bWwvOTQ4NzA1L2h0bWw1Z2FtZS9zbmRfc3ltMD-ub2dn'
+e2 = document.createElement("div")
+ex2=(x)=>`font-family:'consolas',monospace;font-size:30px;word-break:break-word;white-space:pre-line;color:${x}`
+e2.setAttribute("style","font-family:'consolas',monospace;font-size:40px;word-break:break-word;white-space:pre-line;color:white")
+e2.textContent = "syntax:\n3;-1 0 1\n10;0 1 22 13 4 5 6 7 8 -1\npress enter"
+document.body.appendChild(document.createElement("br")) 
+document.body.appendChild(document.createElement("br")) 
+document.body.appendChild(e2)
+e.value = "10;0 1 2 3 4 5 6 7 8 -1"
+
+slang = [ // flowi wants this. llama.
+	["Z", 22n],["B", 13n],["L", -1n],["S", -109n], // scooter = -109 btw.
+	["WETRAISINS",86n],["WETCRAISINS",88n],["A",-3013n]
+]
+pm = [
+	"woohoo! plentiful!!", 
+	"this set flashed green",
+	"it's not red this time", 
+	"plentiful plentiful plentiful", 
+	"^^^ that set is extremely cool because it's plentiful", 
+	"hey, can i double check?", 
+	"plentiful. real.", 
+	"research shows finding a plentiful set increases lifespan by 300%",
+	"Yes Is Plentiful.", 
+	"P L E N T I F U L",
+	"do you have 0 somewhere in that set?",
+	"most llama set ever.", //zi
+	"this set is llama approved", //zi
+	"LLAMAMAMAMAAAAAAAAA",
+	"only 0.02% of people can find a plentiful set by themselves",
+	"Caillou Finds a Plentiful Set/Ungrounded", //zi
+	"top infinity plentiful sets. at number infinity is that set"
+]
+xpm = [
+	"X",
+	"Nope!",
+	"nuh uh",
+	"i dont like that set so i marked it as not plentiful",
+	"as you can see (and hear) this isnt plentiful",
+	"go back to that plentiful set",
+	"not plentiful? you're getting a ticket for that",
+	"eagle plentiful",
+	"you have too many negatives",
+	"Man.",
+	"ok look it didnt have to be this way but...",
+	"maintenance", //zi
+	"set is not plentiful. check for unexpected descales", //zi
+	"one more run guys", //zi
+	"NEVER INPUT THIS SET AGAIN."
+]
+
+
+mod=(x,y)=>{ return (x+y-(x/y)*y)%y }
+U=(v,b,n)=>{
+    let on = n
+    let res = []
+    let udigits = v.map((x)=>{return mod(x,b)})
+    let resrem = []
+    while (true) {
+        let io = udigits.indexOf(mod(n,b))
+        res.push(v[io])
+        if (resrem.includes(n)) {
+			a = resrem.indexOf(n)
+            if (!(a == res.length-2 && res[a] == 0)) {
+                isplentiful = false
+				notplentifuldo(`${on} is unwritable`)
+            } else {
+                knownwritable.push(res)
+				knownwritable = knownwritable.flat()
+			} 
+            return
+        } else {
+            resrem.push(n)
+        }
+        n -= v[io]
+        n /= b
+		if (knownwritable.includes(n)) {
+			return 
+		} 
+    }
+}
+function notplentifuldo(rr) {
+	e.setAttribute("style",ex("#f00")); ec = 1000
+    e2.setAttribute("style",ex2("#f00"))
+    e2.textContent = `${xpm[Math.floor(Math.random()*xpm.length)]}\n\n${rr}`
+    w = new Audio(atob(aud.replace("-","I")))
+    w.preservesPitch = false; w.playbackRate = 2
+    w.play()
+}
+function _() {
+    isplentiful = true
+    z = e.value.split(";")
+    inpb = BigInt(z[0])
+    inp = z[1].split(" ").map((u)=>{
+		for (let slang_ of slang) {
+			if (u.toLocaleUpperCase() == slang_[0]) return slang_[1]
+		}
+		return BigInt(u)
+	})
+	knownwritable = [] 
+    am = 0n
+    inp.map((x)=>{
+        y = x<0?-x:x
+        if (y/9n > am) am = y/9n
+    })
+    am++
+
+	if (!(inp.includes(0n))) {
+		let message = [
+			"if we get rid of 0, then we have to",
+			"put different digits in all those places",
+			"and we end up with an infinite sum.",
+			"we can't write any finite values.",
+			"EVERY NUMBER IS UNDEFINED!",
+			"-TGC"
+		]
+		notplentifuldo(message.join("\n")); return
+	}
+	if (inp.length != Number(inpb)) {
+		notplentifuldo(`number of digits must be equal to base`); return
+	}
+	let zi = false
+	for (let v_ of inp) {
+		if (mod(v_,inpb-1n) == 0 && v_ != 0) zi = true
+	}
+	if (zi) {
+		notplentifuldo(`any digit cannot be a multiple of base - 1 (which is ${inpb-1n}) excluding 0\nthanks zi`); return
+    }
+	if (
+		inp.map((u)=>mod(u,inpb)).toSorted((A,B)=>Number(A-B)).join(" ") !=
+		new Array(Number(inpb)).fill(0).map((u,iu)=>iu).join(" ")
+	) {
+        notplentifuldo("one or more lumns empty\nlumns: " + inp.map((u)=>mod(u,inpb)).join(" ")); return
+    }
+	
+    if (am > 10000000n) {
+        e.setAttribute("style",ex("#0ff")); ec = 1000
+		e2.setAttribute("style",ex2("#0ff"))
+		e2.textContent = `your set is too cool to be checked\n(some digits are too big, im not checking ${(-am).toLocaleString()} to ${am.toLocaleString()})`
+        w = new Audio(atob(aud.replace("-","M")))
+        w.preservesPitch = false; w.playbackRate = 2
+        w.play()
+		return
+    }
+    logs = []
+    for (let i = -am; i <= am && isplentiful; i++) {
+		U(inp,inpb,i)
+    }
+    if (isplentiful) {
+        e.setAttribute("style",ex("#0f0")); ec = 1000
+        e2.setAttribute("style",ex2("#0f0"))
+        w = new Audio(atob(aud.replace("-","Y")))
+        w.preservesPitch = false; w.playbackRate = 2
+        w.play()
+        e2.textContent = pm[Math.floor(pm.length*Math.random())]
+    }
+}
+document.addEventListener("keydown",(E)=>{
+	e2.textContent = "" 
+    if (E.key == "Enter") {
+        try {
+			_()
+			w = new Audio("https://codeberg.org/BalatroMayhem/Mayhem/raw/branch/main/assets/sounds/hyperoperator.ogg") 
+			e2.textContent += "\nbeta feature: quick compiling"
+		} catch (Err) {
+            e.setAttribute("style",ex("#ff0")); ec = 1000
+            e2.setAttribute("style",ex2("#ff0"))
+            e2.textContent = `an error occured when checking:\n\n${Err.stack}\n\nif you think this is not supposed to happen, send to cr`
+            w = new Audio(atob(aud.replace("-","Q")))
+            w.preservesPitch = false; w.playbackRate = 2
+            w.play()
+        }
+    }
+})
+nd = Date.now()
+I = setInterval(()=>{
+    dt = Date.now() - nd
+    nd = Date.now()
+    if (ec > 0) {
+        ec -= dt
+    } else {
+        e.setAttribute("style",ex("#fff"))
+    }
+},0)
+
+</script>
+</body>
+</html>
