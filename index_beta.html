@@ -98,9 +98,11 @@ function notplentifuldo(rr) {
 	e.setAttribute("style",ex("#f00")); ec = 1000
     e2.setAttribute("style",ex2("#f00"))
     e2.textContent = `${xpm[Math.floor(Math.random()*xpm.length)]}\n\n${rr}`
-    w = new Audio(atob(aud.replace("-","I")))
+    /*w = new Audio(atob(aud.replace("-","I")))
     w.preservesPitch = false; w.playbackRate = 2
-    w.play()
+    w.play()*/
+	w = new Audio("https://codeberg.org/BalatroMayhem/Mayhem/raw/branch/main/assets/sounds/hyperoperator.ogg") 
+	w.play()
 }
 function _() {
     isplentiful = true
@@ -148,13 +150,15 @@ function _() {
         notplentifuldo("one or more lumns empty\nlumns: " + inp.map((u)=>mod(u,inpb)).join(" ")); return
     }
 	
-    if (am > 10000000n) {
+    if (am > 1000000000n) { 
         e.setAttribute("style",ex("#0ff")); ec = 1000
 		e2.setAttribute("style",ex2("#0ff"))
 		e2.textContent = `your set is too cool to be checked\n(some digits are too big, im not checking ${(-am).toLocaleString()} to ${am.toLocaleString()})`
-        w = new Audio(atob(aud.replace("-","M")))
+        /*w = new Audio(atob(aud.replace("-","M")))
         w.preservesPitch = false; w.playbackRate = 2
-        w.play()
+        w.play()*/
+		w = new Audio("https://codeberg.org/BalatroMayhem/Mayhem/raw/branch/main/assets/sounds/hyperoperator.ogg") 
+		w.play()
 		return
     }
     logs = []
@@ -165,9 +169,11 @@ function _() {
         e.setAttribute("style",ex("#0f0")); ec = 1000
         e2.setAttribute("style",ex2("#0f0"))
         w = new Audio(atob(aud.replace("-","Y")))
-        w.preservesPitch = false; w.playbackRate = 2
+        /*w.preservesPitch = false; w.playbackRate = 2
         w.play()
-        e2.textContent = pm[Math.floor(pm.length*Math.random())]
+        e2.textContent = pm[Math.floor(pm.length*Math.random())]*/
+		w = new Audio("https://codeberg.org/BalatroMayhem/Mayhem/raw/branch/main/assets/sounds/hyperoperator.ogg") 
+		w.play()
     }
 }
 document.addEventListener("keydown",(E)=>{
@@ -175,8 +181,6 @@ document.addEventListener("keydown",(E)=>{
     if (E.key == "Enter") {
         try {
 			_()
-			w = new Audio("https://codeberg.org/BalatroMayhem/Mayhem/raw/branch/main/assets/sounds/hyperoperator.ogg") 
-			w.play()
 			e2.textContent += "\nbeta feature: quick compiling"
 		} catch (Err) {
             e.setAttribute("style",ex("#ff0")); ec = 1000
