@@ -79,8 +79,9 @@ U=(v,b,n)=>{
                 isplentiful = false
 				notplentifuldo(`${on} is unwritable`)
             } else {
-                knownwritable.push(res)
-				knownwritable = knownwritable.flat()
+				for (let re of res) {
+					knownwritable[re.toString()] = 1
+				}
 			} 
             return
         } else {
@@ -88,7 +89,7 @@ U=(v,b,n)=>{
         }
         n -= v[io]
         n /= b
-		if (knownwritable.includes(n)) {
+		if (knownwritable[n.toString()] != undefined) {
 			return 
 		} 
     }
@@ -111,7 +112,7 @@ function _() {
 		}
 		return BigInt(u)
 	})
-	knownwritable = [] 
+	knownwritable = {} 
     am = 0n
     inp.map((x)=>{
         y = x<0?-x:x
