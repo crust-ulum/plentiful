@@ -79,8 +79,8 @@ U=(v,b,n)=>{
                 isplentiful = false
 				notplentifuldo(`${on} is unwritable`)
             } else {
-				for (let re of resrem) {
-					knownwritable[re.toString()] = 1
+				for (let re = 1; re < resrem.length; re++) {
+					knownwritable[resrem[re].toString()] = 1
 				}
 			} 
             return
@@ -170,8 +170,8 @@ function _() {
         e2.setAttribute("style",ex2("#0f0"))
         w = new Audio(atob(aud.replace("-","Y")))
         /*w.preservesPitch = false; w.playbackRate = 2
-        w.play()
-        e2.textContent = pm[Math.floor(pm.length*Math.random())]*/
+        w.play()*/
+        e2.textContent = pm[Math.floor(pm.length*Math.random())]
 		w = new Audio("https://codeberg.org/BalatroMayhem/Mayhem/raw/branch/main/assets/sounds/hyperoperator.ogg") 
 		w.play()
     }
